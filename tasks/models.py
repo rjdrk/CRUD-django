@@ -9,7 +9,7 @@ class Task(models.Model):
     task_id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
-    status = models.CharField(max_length=50, choices=STATUS, default='todo')
+    status = models.CharField(max_length=50, choices=STATUS, default='TO_DO')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
