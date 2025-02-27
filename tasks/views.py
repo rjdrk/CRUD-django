@@ -6,7 +6,7 @@ from .serializers import TaskSerializer
 from django.conf import settings
 from django.http import JsonResponse
 
-# Middleware de autenticación por API Key
+
 # Función para verificar API Key
 def validate_api_key(request):
     api_key = request.headers.get('API-KEY')
@@ -22,3 +22,13 @@ def create_task(request):
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET'])
+def list_tasks(request):
+    print(request.headers)
+    if not validate_api_key(request):
+        return Response({'error': 'Unauthorized'}, status=status.HTTP_401_UNAUTHORIZED)
+
+    tasks = Task.objects.all()
+    serializer = TaskSerializer(tasks, many=True)
+    return Response(serializer.data)
