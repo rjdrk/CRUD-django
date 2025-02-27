@@ -1,5 +1,22 @@
-# .env
-.env
+# Archivos y carpetas de Python
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.swp
+*.swo
+*.log
 
-# Virtualizador python
-venv
+# Entorno virtual
+.env
+.env
+*.env
+venv/
+
+# VS Code
+.vscode/
+
+### OSX ###
+.DS_Store
+.AppleDouble
+.LSOverride

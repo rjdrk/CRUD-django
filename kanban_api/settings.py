@@ -87,7 +87,7 @@ DATABASES = {
         'HOST': env('DB_HOST'),
         'PORT': env('DB_PORT'),
         'OPTIONS': {
-            'options': env('DB_SCHEMA'),  # Especifica el schema
+            'options': env('DB_SCHEMA'),
         },
     }
 }
