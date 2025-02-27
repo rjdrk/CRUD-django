@@ -25,10 +25,22 @@ def create_task(request):
 
 @api_view(['GET'])
 def list_tasks(request):
-    print(request.headers)
     if not validate_api_key(request):
         return Response({'error': 'Unauthorized'}, status=status.HTTP_401_UNAUTHORIZED)
 
     tasks = Task.objects.all()
     serializer = TaskSerializer(tasks, many=True)
     return Response(serializer.data)
+
+@api_view(['GET'])
+def get_task(request, task_id):
+    if not validate_api_key(request):
+        return Response({'error': 'Unauthorized'}, status=status.HTTP_401_UNAUTHORIZED)
+
+    try:
+        task = Task.objects.get(task_id=task_id)
+        print(task)
+        serializer = TaskSerializer(task)
+        return Response(serializer.data)
+    except Task.DoesNotExist:
+        return Response({'error': 'Task not found'}, status=status.HTTP_404_NOT_FOUND)
