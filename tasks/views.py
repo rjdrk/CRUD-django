@@ -7,6 +7,7 @@ from django.conf import settings
 from django.http import JsonResponse
 from utils.authentication import validate_api_key
 
+# Metodo POST
 @api_view(['POST'])
 def create_task(request):
     if not validate_api_key(request):
@@ -26,6 +27,7 @@ def create_task(request):
         print(f"Error al crear la tarea: {e}")
         return Response({'error': 'Internal Server Error'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+# Metodo GET list
 @api_view(['GET'])
 def list_tasks(request):
     if not validate_api_key(request):
@@ -44,6 +46,7 @@ def list_tasks(request):
         print(f"Error al obtener las tareas: {e}")
         return Response({'error': 'Internal Server Error'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+# Metodo GET
 @api_view(['GET'])
 def get_task(request, task_id):
     if not validate_api_key(request):
@@ -60,7 +63,8 @@ def get_task(request, task_id):
     except Exception as e:
         print(f"Error al obtener la tarea con ID {task_id}: {e}")  # Log del error
         return Response({'error': 'Internal Server Error'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-    
+
+# Metodo PUT  
 @api_view(['PUT'])
 def update_task(request, task_id=None):
     if not validate_api_key(request):
@@ -89,6 +93,7 @@ def update_task(request, task_id=None):
         print(f"Error al actualizar la tarea con ID {task_id}: {e}")  # Log del error
         return Response({'error': 'Internal Server Error'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+# Metodo Delete
 @api_view(['DELETE'])
 def delete_task(request, task_id=None):
     if not validate_api_key(request):
