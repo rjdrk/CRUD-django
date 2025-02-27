@@ -59,3 +59,15 @@ def update_task(request, task_id):
         serializer.save()
         return Response(serializer.data)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['DELETE'])
+def delete_task(request, task_id):
+    if not validate_api_key(request):
+        return Response({'error': 'Unauthorized'}, status=status.HTTP_401_UNAUTHORIZED)
+
+    try:
+        task = Task.objects.get(task_id=task_id)
+        task.delete()
+        return Response({'message': 'Task deleted'}, status=status.HTTP_204_NO_CONTENT)
+    except Task.DoesNotExist:
+        return Response({'error': 'Task not found'}, status=status.HTTP_404_NOT_FOUND)
