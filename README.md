@@ -30,8 +30,8 @@ Este proyecto consiste en un sistema Back-End desarrollado con Django.
     ```bash
     pip install -r requirements.txt
 
-4. Configurar variables de entorno
-    Crear el archivo .env en el directorio back-end y definir las variables necesarias:
+4. Configurar variables de entorno. 
+    Crear el archivo .env en el directorio raiz y definir las variables necesarias:
 
     ```bash
     API_KEY=tu_api_key_secreta
